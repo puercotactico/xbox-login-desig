@@ -46,7 +46,7 @@
     </nav>
 
     <!-- Hero -->
-    <header class="relative h-[60vh] flex items-center overflow-hidden mb-12">
+    <header class="relative h-[60vh] flex items-center overflow-hidden mb-8">
         <img src="https://images.unsplash.com/photo-1627856014759-0a57b592c095?q=80&w=2500" class="absolute inset-0 w-full h-full object-cover opacity-50">
         <div class="absolute inset-0 bg-gradient-to-t from-[#0b0b0b] via-transparent to-transparent"></div>
         <div class="container mx-auto px-6 relative z-10 flex justify-between items-center">
@@ -64,72 +64,97 @@
         </div>
     </header>
 
+    <!-- SECCIÓN DE ANUNCIO (NUEVO) -->
+    <section class="container mx-auto px-6 mb-16 relative z-20">
+        <!-- Contenedor del anuncio con efecto hover y borde brillante -->
+        <div class="relative w-full rounded-2xl overflow-hidden shadow-[0_0_20px_rgba(16,124,16,0.2)] hover:shadow-[0_0_40px_rgba(16,124,16,0.4)] transition-all duration-500 group border border-white/10 cursor-pointer">
+            
+            <!-- La imagen del anuncio: Asegúrate de que sea .jpg o cambia a .png si es necesario -->
+            <img src="imagenes/promocion2.jpg" 
+                 alt="Promoción Especial" 
+                 class="w-full h-[200px] md:h-[400px] object-cover transform group-hover:scale-105 transition duration-700"
+                 onerror="this.src='https://images.unsplash.com/photo-1592155931584-901ac15763e3?q=80&w=1600'"> <!-- Fallback por si no carga -->
+
+            <!-- Degradado sobre la imagen para que se lea el texto si la imagen es clara -->
+            <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent"></div>
+
+            <!-- Texto o Call to Action sobre el anuncio -->
+            <div class="absolute bottom-0 left-0 p-8 md:p-12 max-w-lg">
+                <span class="inline-block px-3 py-1 bg-[#107C10] text-white text-xs font-bold rounded mb-3 tracking-wider">OFERTA LIMITADA</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">DESCUBRE LO NUEVO</h2>
+                <button class="flex items-center gap-2 text-white font-bold hover:text-[#107C10] transition-colors">
+                    VER DETALLES <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
     <!-- Grid de Productos -->
     <main class="container mx-auto px-6 pb-20 relative z-20">
+        <h3 class="text-2xl font-bold mb-6 border-l-4 border-[#107C10] pl-4">Más Populares</h3>
         <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <!-- Las tarjetas se insertan aquí con JS -->
         </div>
     </main>
 
     <script>
-        // DATOS DE EJEMPLO (Simulando la base de datos)
-        // He puesto imágenes reales para que veas el efecto
+        // DATOS DE EJEMPLO
         const products = [
             {
                 title: "Halo Infinite",
                 desc: "Conviértete en el Jefe Maestro.",
                 price: "$1,399",
                 tag: "GAME PASS",
-                img: "https://images.unsplash.com/photo-1627856013091-fedf7bb06400?q=80&w=1000" // Imagen Cyberpunk/Futurista
+                img: "https://images.unsplash.com/photo-1627856013091-fedf7bb06400?q=80&w=1000" 
             },
             {
                 title: "Forza Horizon 5",
                 desc: "Aventura de mundo abierto.",
                 price: "$1,499",
                 tag: "ÉXITO",
-                img: "https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=1000" // Coche deportivo
+                img: "https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=1000" 
             },
             {
                 title: "Xbox Series X",
                 desc: "La consola más rápida y potente.",
                 price: "$13,999",
                 tag: "HARDWARE",
-                img: "https://images.unsplash.com/photo-1621259182978-fbf93132d53d?q=80&w=1000" // Consola
+                img: "https://images.unsplash.com/photo-1621259182978-fbf93132d53d?q=80&w=1000" 
             },
             {
                 title: "Starfield",
                 desc: "Explora las estrellas con Bethesda.",
                 price: "$1,599",
                 tag: "NUEVO",
-                img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000" // Espacio
+                img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000" 
             },
             {
                 title: "Control Elite 2",
                 desc: "Precisión profesional ajustable.",
                 price: "$3,200",
                 tag: "ACCESORIO",
-                img: "https://images.unsplash.com/photo-1600080972464-8e5f35f63d88?q=80&w=1000" // Control
+                img: "https://images.unsplash.com/photo-1600080972464-8e5f35f63d88?q=80&w=1000" 
             },
             {
                 title: "FIFA 24 / FC 24",
                 desc: "El juego de todos.",
                 price: "$1,299",
                 tag: "DEPORTES",
-                img: "https://images.unsplash.com/photo-1518091043644-c1d4457512c6?q=80&w=1000" // Estadio
+                img: "https://images.unsplash.com/photo-1518091043644-c1d4457512c6?q=80&w=1000" 
             },
             {
                 title: "Call of Duty: MW3",
                 desc: "La guerra moderna ha vuelto.",
                 price: "$1,699",
                 tag: "ACCIÓN",
-                img: "https://images.unsplash.com/photo-1552072092-2807d8f3de7d?q=80&w=1000" // Soldado
+                img: "https://images.unsplash.com/photo-1552072092-2807d8f3de7d?q=80&w=1000" 
             },
             {
                 title: "Minecraft Legends",
                 desc: "Estrategia y acción.",
                 price: "$899",
                 tag: "FAMILIA",
-                img: "https://images.unsplash.com/photo-1587573089734-09cb69c0f2b4?q=80&w=1000" // Bloques/Voxel
+                img: "https://images.unsplash.com/photo-1587573089734-09cb69c0f2b4?q=80&w=1000" 
             }
         ];
 
@@ -164,12 +189,11 @@
             </div>
         `).join('');
 
-        // Lógica 3D Tilt (Efecto de inclinación)
+        // Lógica 3D Tilt
         const tilt = (e, card) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left, y = e.clientY - rect.top;
             
-            // Calculamos la rotación basada en la posición del mouse
             const rx = ((y - rect.height/2) / rect.height) * -10;
             const ry = ((x - rect.width/2) / rect.width) * 10;
             
