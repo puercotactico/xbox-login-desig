@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito | Xbox</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #0b0b0b; overflow-x: hidden; }
+        ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; } ::-webkit-scrollbar-thumb:hover { background: #107C10; }
+        .glass { background: rgba(20,20,20,0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
+        .anim-entry { animation: fadeIn 0.6s ease-out forwards; opacity: 0; transform: translateY(10px); }
+        @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-[radial-gradient(circle_at_top,#1a1a1a_0%,#000_100%)] min-h-screen text-white">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 px-6 py-4 flex justify-between items-center bg-[#0a0a0a]/90 backdrop-blur border-b border-white/5">
+        <a href="contenido.html" class="text-gray-400 hover:text-white transition font-bold text-sm tracking-wider"><i class="fas fa-arrow-left mr-2"></i> SEGUIR COMPRANDO</a>
+        <div class="flex items-center gap-2"><i class="fab fa-xbox text-2xl text-[#107C10]"></i> <span class="font-bold tracking-widest text-sm">CARRITO</span></div>
+    </nav>
+
+    <main class="container mx-auto px-4 pt-24 pb-12 flex flex-col lg:flex-row gap-8">
+        <!-- Lista de Productos (Generada por JS) -->
+        <div class="flex-1 space-y-4">
+            <h1 class="text-3xl font-black mb-6 flex items-center gap-3 anim-entry">TU BOTÍN <span class="text-sm font-normal text-gray-400 bg-[#1a1a1a] px-3 py-1 rounded-full border border-gray-800">3 Ítems</span></h1>
+            <div id="cart-container" class="space-y-4"></div> <!-- Los productos se insertan aquí -->
+        </div>
+
+        <!-- Resumen -->
+        <div class="w-full lg:w-96 anim-entry" style="animation-delay: 0.3s">
+            <div class="glass p-6 rounded-2xl sticky top-24">
+                <h2 class="text-xl font-bold mb-6">Resumen</h2>
+                <div class="space-y-3 text-sm mb-6 pb-6 border-b border-gray-700 text-gray-400">
+                    <div class="flex justify-between"><span>Subtotal</span><span class="text-white">$739.97</span></div>
+                    <div class="flex justify-between"><span>Envío</span><span class="text-[#107C10]">GRATIS</span></div>
+                    <div class="flex justify-between"><span>Impuestos</span><span class="text-white">$118.40</span></div>
+                </div>
+                <div class="flex justify-between items-center mb-8"><span class="font-bold text-lg">TOTAL</span><span class="font-black text-2xl text-[#107C10]">$858.37</span></div>
+                
+                <button onclick="checkout()" id="btn-pay" class="w-full py-4 rounded-lg font-bold tracking-widest flex justify-center items-center gap-2 bg-[#107C10] hover:bg-[#159115] hover:shadow-[0_0_20px_rgba(16,124,16,0.5)] transition-all group">
+                    <span>PAGAR AHORA</span> <i class="fas fa-chevron-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                    <div id="loader" class="hidden w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                </button>
+                <div class="mt-6 flex justify-center gap-4 text-gray-500 text-2xl"><i class="fab fa-cc-visa hover:text-white transition"></i><i class="fab fa-cc-mastercard hover:text-white transition"></i><i class="fab fa-cc-paypal hover:text-white transition"></i></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Datos de productos para generar el HTML dinámicamente
+        const products = [
+            { name: "Xbox Series X", desc: "1TB SSD • Negro", price: 499.99, img: "https://images.unsplash.com/photo-1593118247619-e2d6f056869e?q=80&w=300" },
+            { name: "Elite Controller 2", desc: "Pro • Wireless", price: 179.99, img: "https://images.unsplash.com/photo-1605901309584-818e25960b8f?q=80&w=300" },
+            { name: "Cyber Odyssey", desc: "Digital Key", price: 59.99, img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=300", tag: "DIGITAL" }
+        ];
+
+        // Renderizar productos
+        document.getElementById('cart-container').innerHTML = products.map((p, i) => `
+            <div class="glass p-4 rounded-xl flex gap-4 items-center anim-entry" style="animation-delay: ${i * 0.1}s">
+                <div class="w-24 h-24 bg-[#151515] rounded-lg overflow-hidden border border-white/5 relative group shrink-0">
+                    <img src="${p.img}" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    ${p.tag ? `<span class="absolute inset-0 bg-black/40 flex items-center justify-center"><span class="text-[10px] font-bold bg-[#107C10] px-1.5 rounded">${p.tag}</span></span>` : ''}
+                </div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-start">
+                        <div><h3 class="font-bold text-lg">${p.name}</h3><p class="text-xs text-gray-400">${p.desc}</p></div>
+                        <button class="text-gray-500 hover:text-red-500 transition"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                    <div class="flex justify-between items-end mt-4">
+                        <div class="flex items-center border border-gray-700 rounded-lg bg-[#0a0a0a]"><button class="px-3 hover:text-[#107C10]">-</button><span class="text-sm font-mono w-4 text-center">1</span><button class="px-3 hover:text-[#107C10]">+</button></div>
+                        <span class="font-bold text-lg">$${p.price}</span>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+        // Lógica de pago
+        function checkout() {
+            const btn = document.getElementById('btn-pay'), loader = document.getElementById('loader'), span = btn.querySelector('span'), icon = btn.querySelector('i');
+            span.style.display = 'none'; icon.style.display = 'none'; loader.style.display = 'block';
+            btn.classList.add('opacity-80', 'cursor-not-allowed');
+            setTimeout(() => {
+                alert('¡Compra Exitosa! Redirigiendo...');
+                window.location.href = 'contenido.html';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
